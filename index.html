@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Nubbin Labs: koleksiyoncular için küçük araçlar. Brickfolio, LEGO koleksiyonunu düzenleyen masaüstü uygulaması.">
+<title>Nubbin Labs</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+/* Düzen: tam genişlikte lacivert hero bandı, altında krem zeminde ekran görüntülü bölümler; Fredoka yalnızca marka yazısında, geri kalan Manrope. */
+:root{
+  --bg:#f7f2e4; --surface:#fffdf6; --fg:#171a33; --muted:#555b86; --line:#dfd5b6;
+  --navy:#1b1f3b; --navy2:#262b52; --yellow:#ffc933; --on-navy:#ffffff; --on-navy-muted:#aab0d8;
+  --yellow-ink:#1b1f3b; --shot-line:#cfc49f;
+  --wordmark:'Fredoka',ui-rounded,system-ui,sans-serif; --ui:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111428; --surface:#181c37; --fg:#f1eee2; --muted:#a9afd6; --line:#2b3060;
+  --navy:#0b0e20; --navy2:#171b38; --shot-line:#343a6d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111428; --surface:#181c37; --fg:#f1eee2; --muted:#a9afd6; --line:#2b3060;
+  --navy:#0b0e20; --navy2:#171b38; --shot-line:#343a6d; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--ui);font-size:17px;line-height:1.65}
+a{color:inherit}
+h1,h2,h3{margin:0;line-height:1.12;text-wrap:balance;letter-spacing:-.02em}
+a:focus-visible,button:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:4px}
+.in{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+
+/* üst bant */
+.bant{background:var(--navy);color:var(--on-navy)}
+.ust{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:22px}
+.marka{display:flex;align-items:center;gap:12px;text-decoration:none;font-family:var(--wordmark);font-weight:700;font-size:25px;letter-spacing:-.5px}
+.marka small{font-weight:600;color:var(--yellow);letter-spacing:4px;font-size:13px;margin-left:4px}
+nav{display:flex;gap:28px;font-weight:600;font-size:15px}
+nav a{text-decoration:none;color:var(--on-navy-muted)}
+nav a:hover,nav a:focus-visible{color:#fff}
+.hero{padding-block:48px 0;display:grid;grid-template-columns:minmax(0,1fr);gap:40px}
+.etiket{font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow)}
+.hero h1{font-size:clamp(38px,6.2vw,72px);font-weight:800;max-width:15ch;margin-top:14px}
+.hero p.lead{color:var(--on-navy-muted);font-size:clamp(17px,2vw,20px);max-width:58ch;margin:22px 0 30px}
+.dugmeler{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:16px;padding:14px 24px;border-radius:8px;text-decoration:none;border:2px solid transparent}
+.btn.sari{background:var(--yellow);color:var(--yellow-ink)}
+.btn.cizgi{border-color:#4a5088;color:#fff}
+.btn[aria-disabled="true"]{opacity:.6;cursor:not-allowed}
+.hero-gorsel{margin-top:8px;margin-bottom:-120px;position:relative}
+.cerceve{border-radius:10px;overflow:hidden;border:1px solid var(--shot-line);box-shadow:0 30px 70px -28px rgba(8,10,30,.65);background:var(--surface)}
+.cerceve img{display:block;width:100%;height:auto}
+.alta-bosluk{height:120px}
+
+/* şerit */
+.serit{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;padding-block:52px 12px;border-bottom:1px solid var(--line)}
+.serit div b{display:block;font-size:15px;margin-bottom:4px}
+.serit div span{color:var(--muted);font-size:15px}
+
+/* bölümler */
+section{padding-block:76px}
+section+section{border-top:1px solid var(--line)}
+.baslik{max-width:60ch;margin-bottom:44px}
+.baslik h2{font-size:clamp(28px,4vw,42px);font-weight:800;margin-top:12px}
+.baslik .etiket{color:var(--muted)}
+.baslik p{color:var(--muted);margin:14px 0 0}
+.ozellik{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:56px;align-items:center;margin-bottom:84px}
+.ozellik:last-child{margin-bottom:0}
+.ozellik.ters{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+.ozellik.ters .metin{order:2}
+.metin h3{font-size:clamp(23px,2.6vw,30px);font-weight:800;margin-bottom:12px}
+.metin p{color:var(--muted);margin:0 0 14px;max-width:46ch}
+.metin ul{margin:0;padding-left:20px;color:var(--muted)}
+.metin li{margin-bottom:6px}
+.cerceve figcaption{font-size:13px;color:var(--muted);padding:10px 14px;border-top:1px solid var(--line)}
+figure{margin:0}
+
+/* platformlar */
+.platform{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.kart{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:26px}
+.kart h3{font-size:22px;font-weight:800;margin-bottom:6px}
+.kart p{margin:0 0 16px;color:var(--muted);font-size:15px}
+.durum{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:4px}
+.durum.var{background:var(--yellow);color:var(--yellow-ink)}
+.durum.yolda{border:1px solid var(--line);color:var(--muted)}
+.indir{margin-top:28px;display:flex;gap:24px;flex-wrap:wrap;align-items:center;justify-content:space-between;background:var(--navy);color:#fff;border-radius:10px;padding:28px 30px}
+.indir h3{font-size:22px;font-weight:800}
+.indir p{margin:6px 0 0;color:var(--on-navy-muted);font-size:15px;max-width:58ch}
+
+.iki{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:56px}
+.iki h2{font-size:clamp(26px,3.4vw,36px);font-weight:800;margin-bottom:16px}
+.iki p{color:var(--muted);margin:0 0 14px;max-width:52ch}
+.adres{display:inline-flex;gap:12px;align-items:center;flex-wrap:wrap;font-weight:800;font-size:21px;margin-top:6px}
+.adres button{font:inherit;font-size:13px;font-weight:700;background:transparent;color:var(--muted);border:1px solid var(--line);padding:5px 14px;border-radius:6px;cursor:pointer}
+.not{font-size:14px}
+
+footer{background:var(--navy);color:var(--on-navy-muted);font-size:14px}
+footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:30px 40px}
+footer b{color:#fff;font-family:var(--wordmark);font-size:17px}
+footer .yz{color:var(--yellow)}
+
+@media (max-width:820px){
+  .ozellik,.ozellik.ters,.iki{grid-template-columns:minmax(0,1fr);gap:28px}
+  .ozellik.ters .metin{order:0}
+  .ozellik{margin-bottom:60px}
+  section{padding-block:56px}
+  .hero-gorsel{margin-bottom:-60px}.alta-bosluk{height:60px}
+  nav{gap:18px}
+}
+</style>
+
+</head>
+<body>
+<div class="bant">
+  <div class="in">
+    <header class="ust">
+      <a class="marka" href="#ust" aria-label="Nubbin Labs ana sayfa">
+        <svg width="42" height="42" viewBox="0 0 120 120" aria-hidden="true">
+          <circle cx="60" cy="60" r="56" fill="#ffffff"/>
+          <path d="M38 82 V50 M38 62 C38 44 82 44 82 62 V82" fill="none" stroke="#1b1f3b" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="82" cy="34" r="9" fill="#ffc933"/>
+        </svg>
+        <span>nubbin<small>LABS</small></span>
+      </a>
+      <nav aria-label="Bölümler">
+        <a href="#ozellikler">Özellikler</a><a href="#indir">İndir</a><a href="#hakkinda">Hakkında</a><a href="#iletisim">İletişim</a>
+      </nav>
+    </header>
+    <div class="hero" id="ust">
+      <div>
+        <span class="etiket">small tools for collectors</span>
+        <h1>Koleksiyonun için düzenli bir defter.</h1>
+        <p class="lead">Brickfolio, LEGO setlerini tek yerde toplayan bir masaüstü uygulaması. Set numarasını yaz, bilgiler gelsin. Veriler yalnızca senin bilgisayarında kalır, internet olmadan da çalışır.</p>
+        <div class="dugmeler">
+          <a class="btn sari" href="#indir">İndir · macOS</a>
+          <a class="btn cizgi" href="#ozellikler">Özelliklere bak</a>
+        </div>
+      </div>
+      <div class="hero-gorsel">
+        <figure class="cerceve"><img src="img/grup.jpg" width="1600" height="918" alt="Brickfolio, koleksiyonun temaya göre gruplandığı görünüm"></figure>
+      </div>
+    </div>
+    <div class="alta-bosluk"></div>
+  </div>
+</div>
+
+<main>
+  <div class="in">
+    <div class="serit">
+      <div><b>Set numarasından ekle</b><span>Ad, tema, parça ve mini figür sayısı kendiliğinden dolar.</span></div>
+      <div><b>İnternetsiz çalışır</b><span>Koleksiyonun Belgeler/Brickfolio klasöründe durur.</span></div>
+      <div><b>Hesap ve abonelik yok</b><span>Kayıt gerekmez, veri toplanmaz.</span></div>
+      <div><b>Türkçe ve İngilizce</b><span>Arayüz iki dilde, rehber uygulamanın içinde.</span></div>
+    </div>
+
+    <section id="ozellikler" style="padding-top:64px">
+      <div class="baslik">
+        <span class="etiket">Özellikler</span>
+        <h2>Koleksiyonu yönetmek için gereken her şey, fazlası değil.</h2>
+      </div>
+
+      <div class="ozellik">
+        <div class="metin">
+          <h3>Tüm setlerin tek listede</h3>
+          <p>Set adı, numara, tema, parça sayısı, mini figürler, durum ve kutu durumu aynı tabloda. Başlığa tıklayarak sıralar, sütunları dilediğin gibi açıp kapatırsın.</p>
+          <ul><li>Arama, etiket ve durum filtreleri</li><li>Toplu düzenleme ve geri alma</li><li>Üstte toplam set, parça ve mini figür sayısı</li></ul>
+        </div>
+        <figure class="cerceve"><img src="img/liste.jpg" loading="lazy" width="1600" height="918" alt="Brickfolio set listesi"></figure>
+      </div>
+
+      <div class="ozellik ters">
+        <figure class="cerceve"><img src="img/form.jpg" loading="lazy" width="1600" height="918" alt="Brickfolio'da yeni set ekleme formu"></figure>
+        <div class="metin">
+          <h3>Set numarasını yaz, gerisi gelsin</h3>
+          <p>"Set numarasından internetten getir" düğmesi ya da araç çubuğundaki hızlı ekle kutusuyla yeni seti saniyeler içinde eklersin. Alış fiyatı, güncel değer, not ve fotoğraf da girilebilir.</p>
+          <ul><li>Aynı set iki kez eklenmeye çalışılırsa uyarır</li><li>Eksik parça ve özel mini figür notları</li></ul>
+        </div>
+      </div>
+
+      <div class="ozellik">
+        <div class="metin">
+          <h3>Temaya göre grupla, emekli setleri gör</h3>
+          <p>Koleksiyonu tema başlıkları altında topla; her grupta set, parça ve mini figür toplamı görünür. Üretimden kalkan setler 💎 işaretiyle öne çıkar.</p>
+          <ul><li>"Sadece emekli" filtresi ve sayaç</li><li>İstek listesi, haberler ve çıkış takvimi ayrı sekmelerde</li></ul>
+        </div>
+        <figure class="cerceve"><img src="img/grup.jpg" loading="lazy" width="1600" height="918" alt="Temaya göre gruplanmış koleksiyon"></figure>
+      </div>
+    </section>
+
+    <section id="indir">
+      <div class="baslik">
+        <span class="etiket">Platformlar</span>
+        <h2>Önce Mac, sonra Windows.</h2>
+        <p>Brickfolio şimdi macOS için hazır. Windows sürümü de planlandı ve hazır olunca bu sayfadan duyurulacak.</p>
+      </div>
+      <div class="platform">
+        <div class="kart">
+          <h3>macOS</h3>
+          <p>Kurulum dosyası (.dmg). İlk açılışta uygulamaya sağ tıklayıp "Aç" demek gerekir, çünkü uygulama henüz Apple'a kayıtlı değil.</p>
+          <span class="durum var">Hazır · 0.9.17 Beta</span>
+        </div>
+        <div class="kart">
+          <h3>Windows</h3>
+          <p>Aynı özelliklerle Windows sürümü üzerinde çalışıyoruz. Tarih verilmedi.</p>
+          <span class="durum yolda">Yolda</span>
+        </div>
+      </div>
+      <div class="indir">
+        <div>
+          <h3>Brickfolio · Setlog 0.9.17 Beta</h3>
+          <p>macOS için kurulum dosyası yakında bu düğmeden indirilebilecek.</p>
+        </div>
+        <a class="btn sari" href="#indir" aria-disabled="true">Yakında · macOS için indir</a>
+      </div>
+    </section>
+
+    <section id="hakkinda">
+      <div class="iki">
+        <div>
+          <span class="etiket" style="color:var(--muted)">Hakkında</span>
+          <h2 style="margin-top:12px">Küçük ama işe yarar.</h2>
+          <p style="margin-top:6px">Nubbin, bir LEGO tuğlasının üstündeki küçük çıkıntının adıdır. Nubbin Labs de o çıkıntı gibi küçük ama işe yarayan araçlar yapmak için kuruldu.</p>
+          <p>Brickfolio kişisel bir ihtiyaçtan doğdu: koleksiyonu düzenli tutmak. Şimdi aynı ihtiyacı olan koleksiyoncular için paylaşılıyor.</p>
+        </div>
+        <div>
+          <span class="etiket" style="color:var(--muted)">Gizlilik</span>
+          <h2 style="margin-top:12px">Verin sende kalır.</h2>
+          <p style="margin-top:6px">Brickfolio hesap istemez ve veri toplamaz. Koleksiyonun bilgisayarındaki Belgeler/Brickfolio klasöründe saklanır. İnternet yalnızca set bilgisi ya da haber getirirken kullanılır. İstersen açılışta şifre sorulmasını açabilirsin.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="iletisim">
+      <div class="baslik" style="margin-bottom:24px">
+        <span class="etiket">İletişim</span>
+        <h2>Hata ya da öneri mi var?</h2>
+        <p>Yaz, okuruz. Hatayı daha çabuk bulmamız için sürüm numarasını ve macOS sürümünü belirtmen yeter.</p>
+      </div>
+      <span class="adres"><span id="posta">destek@nubbinlabs.com</span>
+        <button type="button" id="kopyala" aria-label="E-posta adresini kopyala">Kopyala</button></span>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="in">
+    <span><b>nubbin labs</b> &nbsp;·&nbsp; <span class="yz">small tools for collectors</span></span>
+    <span>© 2026 Nubbin Labs · nubbinlabs.com</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var b=document.getElementById('kopyala'),t=document.getElementById('posta');
+  function sec(){var r=document.createRange();r.selectNodeContents(t);var s=getSelection();s.removeAllRanges();s.addRange(r)}
+  b.addEventListener('click',function(){
+    function ok(){b.textContent='Kopyalandı';setTimeout(function(){b.textContent='Kopyala'},1600)}
+    try{navigator.clipboard.writeText(t.textContent).then(ok,sec)}catch(e){sec()}
+  });
+})();
+</script>
+</body>
+</html>
