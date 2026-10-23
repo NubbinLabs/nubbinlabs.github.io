@@ -106,6 +106,12 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;pa
 footer b{color:#fff;font-family:var(--wordmark);font-size:17px}
 footer .yz{color:var(--yellow)}
 
+
+.dil{display:inline-flex;border:1px solid #4a5088;border-radius:8px;overflow:hidden;margin-left:4px}
+.dil button{font:inherit;font-size:13px;font-weight:800;letter-spacing:.06em;background:transparent;color:var(--on-navy-muted);border:0;padding:6px 12px;cursor:pointer}
+.dil button[aria-pressed="true"]{background:var(--yellow);color:var(--yellow-ink)}
+.ust .sag{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+
 @media (max-width:820px){
   .ozellik,.ozellik.ters,.iki{grid-template-columns:minmax(0,1fr);gap:28px}
   .duyuru{grid-template-columns:minmax(0,1fr)}
@@ -130,9 +136,12 @@ footer .yz{color:var(--yellow)}
         </svg>
         <span>nubbin<small>LABS</small></span>
       </a>
-      <nav aria-label="Bölümler">
+      <div class="sag">
+        <nav aria-label="Bölümler">
         <a href="#ozellikler">Özellikler</a><a href="#indir">İndir</a><a href="#duyurular">Duyurular</a><a href="#hakkinda">Hakkında</a><a href="#iletisim">İletişim</a>
       </nav>
+        <div class="dil" role="group" aria-label="Dil / Language"><button type="button" data-dil="tr" aria-pressed="true">TR</button><button type="button" data-dil="en" aria-pressed="false">EN</button></div>
+      </div>
     </header>
     <div class="hero" id="ust">
       <div>
@@ -298,12 +307,42 @@ footer .yz{color:var(--yellow)}
 
 <script>
 (function(){
-  var b=document.getElementById('kopyala'),t=document.getElementById('posta');
-  function sec(){var r=document.createRange();r.selectNodeContents(t);var s=getSelection();s.removeAllRanges();s.addRange(r)}
-  b.addEventListener('click',function(){
-    function ok(){b.textContent='Kopyalandı';setTimeout(function(){b.textContent='Kopyala'},1600)}
-    try{navigator.clipboard.writeText(t.textContent).then(ok,sec)}catch(e){sec()}
+  var EN={"Özellikler": "Features", "İndir": "Download", "Duyurular": "News", "Hakkında": "About", "İletişim": "Contact", "Koleksiyonun için düzenli bir defter.": "A tidy notebook for your collection.", "Brickfolio, LEGO setlerini tek yerde toplayan bir masaüstü uygulaması. Set numarasını yaz, bilgiler gelsin. Veriler yalnızca senin bilgisayarında kalır, internet olmadan da çalışır.": "Brickfolio is a desktop app that keeps all your LEGO sets in one place. Type a set number and the details fill in. Your data stays on your own computer, and it works without internet.", "İndir · macOS": "Download · macOS", "Özelliklere bak": "See features", "Ücretsiz · Hesap yok · Reklam yok": "Free · No account · No ads", "Set numarasından ekle": "Add by set number", "Ad, tema, parça ve mini figür sayısı kendiliğinden dolar.": "Name, theme, piece and minifigure counts fill in automatically.", "İnternetsiz çalışır": "Works offline", "Koleksiyonun Belgeler/Brickfolio klasöründe durur.": "Your collection lives in the Documents/Brickfolio folder.", "Ücretsiz": "Free", "Hesap, abonelik ve reklam yok. Veri toplanmaz.": "No account, subscription or ads. No data is collected.", "Türkçe ve İngilizce": "Turkish and English", "Arayüz iki dilde, rehber uygulamanın içinde.": "The interface comes in two languages, with a guide inside the app.", "Koleksiyonu yönetmek için gereken her şey, fazlası değil.": "Everything you need to manage a collection, nothing more.", "Tüm setlerin tek listede": "All your sets in one list", "Set adı, numara, tema, parça sayısı, mini figürler, durum ve kutu durumu aynı tabloda. Başlığa tıklayarak sıralar, sütunları dilediğin gibi açıp kapatırsın.": "Set name, number, theme, piece count, minifigures, status and box condition sit in the same table. Click a heading to sort, and show or hide columns as you like.", "Arama, etiket ve durum filtreleri": "Search, tag and status filters", "Toplu düzenleme ve geri alma": "Bulk editing and undo", "Üstte toplam set, parça ve mini figür sayısı": "Total sets, pieces and minifigures at the top", "Set numarasını yaz, gerisi gelsin": "Type the set number, the rest follows", "\"Set numarasından internetten getir\" düğmesi ya da araç çubuğundaki hızlı ekle kutusuyla yeni seti saniyeler içinde eklersin. Alış fiyatı, güncel değer, not ve fotoğraf da girilebilir.": "Add a new set in seconds with the \"fetch from the internet by set number\" button or the quick-add box in the toolbar. You can also enter purchase price, current value, notes and a photo.", "Aynı set iki kez eklenmeye çalışılırsa uyarır": "Warns you if the same set is added twice", "Eksik parça ve özel mini figür notları": "Notes for missing pieces and custom minifigures", "Temaya göre grupla, emekli setleri gör": "Group by theme, spot retired sets", "Koleksiyonu tema başlıkları altında topla; her grupta set, parça ve mini figür toplamı görünür. Üretimden kalkan setler 💎 işaretiyle öne çıkar.": "Gather your collection under theme headings; each group shows its set, piece and minifigure totals. Sets that are no longer produced stand out with a 💎 mark.", "\"Sadece emekli\" filtresi ve sayaç": "\"Retired only\" filter and counter", "İstek listesi, haberler ve çıkış takvimi ayrı sekmelerde": "Wish list, news and release calendar in separate tabs", "Platformlar": "Platforms", "Önce Mac, sonra Windows.": "Mac first, then Windows.", "Brickfolio şimdi macOS için hazır. Windows sürümü de planlandı ve hazır olunca bu sayfadan duyurulacak.": "Brickfolio is ready for macOS now. A Windows version is also planned and will be announced on this page when it is ready.", "Kurulum dosyası (.dmg). İlk açılışta uygulamaya sağ tıklayıp \"Aç\" demek gerekir, çünkü uygulama henüz Apple'a kayıtlı değil.": "Installer file (.dmg). On first launch, right-click the app and choose \"Open\", because the app is not yet registered with Apple.", "Hazır · 0.9.17 Beta · Ücretsiz": "Ready · 0.9.17 Beta · Free", "Aynı özelliklerle Windows sürümü üzerinde çalışıyoruz. Tarih verilmedi.": "We are working on a Windows version with the same features. No date has been set.", "Yolda": "On the way", "Brickfolio · Setlog 0.9.17 Beta · Ücretsiz": "Brickfolio · Setlog 0.9.17 Beta · Free", "macOS için kurulum dosyası yakında bu düğmeden indirilebilecek.": "The macOS installer will soon be available from this button.", "Yakında · macOS için indir": "Coming soon · Download for macOS", "Son gelişmeler": "Latest news", "22 Ekim 2026": "October 22, 2026", "Brickfolio 0.9.17 Beta hazır": "Brickfolio 0.9.17 Beta is ready", "Emekli setler 💎 işaretiyle görünüyor ve ayrıca filtrelenebiliyor. İstersen açılışta şifre sorulabiliyor. Set numarasının yanlış sete eşleşmesi düzeltildi ve açılış ekranı sadeleşti.": "Retired sets now show a 💎 mark and can be filtered separately. If you wish, the app can ask for a password at launch. A set number matching the wrong set has been fixed, and the opening screen is simpler.", "Nubbin Labs yayında": "Nubbin Labs is live", "Bu site açıldı. Brickfolio'nun kurulum dosyası kısa süre içinde buradan indirilebilecek.": "This site is open. The Brickfolio installer will be available here shortly.", "Planlanıyor": "Planned", "Windows sürümü": "Windows version", "Brickfolio'nun Windows sürümü planlandı. Hazır olduğunda burada duyuracağız. Tarih vermiyoruz.": "A Windows version of Brickfolio is planned. We will announce it here when it is ready. We are not giving a date.", "Küçük ama işe yarar.": "Small but useful.", "Nubbin, bir LEGO tuğlasının üstündeki küçük çıkıntının adıdır. Nubbin Labs de o çıkıntı gibi küçük ama işe yarayan araçlar yapmak için kuruldu.": "A nubbin is the small bump on top of a LEGO brick. Nubbin Labs was founded to make tools that are small like that bump, but useful.", "Nubbin Labs, koleksiyoncular için küçük ve sade araçlar yapan bağımsız bir yazılım atölyesi.": "Nubbin Labs is an independent software workshop making small, simple tools for collectors.", "Brickfolio kişisel bir ihtiyaçtan doğdu: koleksiyonu düzenli tutmak. Şimdi aynı ihtiyacı olan koleksiyoncular için ücretsiz paylaşılıyor.": "Brickfolio was born from a personal need: keeping a collection in order. Now it is shared for free with collectors who have the same need.", "İlkelerimiz: veri kullanıcıda kalır, hesap ve takip yoktur, arayüz sade kalır.": "Our principles: data stays with the user, no accounts and no tracking, and the interface stays simple.", "Gizlilik": "Privacy", "Verin sende kalır.": "Your data stays with you.", "Brickfolio hesap istemez ve veri toplamaz. Koleksiyonun bilgisayarındaki Belgeler/Brickfolio klasöründe saklanır. İnternet yalnızca set bilgisi ya da haber getirirken kullanılır. İstersen açılışta şifre sorulmasını açabilirsin.": "Brickfolio asks for no account and collects no data. Your collection is stored in the Documents/Brickfolio folder on your computer. The internet is used only to fetch set information or news. If you like, you can turn on a password prompt at launch.", "Katkı": "Contribute", "Katkı vermek ister misin?": "Would you like to contribute?", "Brickfolio'yu geliştirirken gönüllü yardıma açığız.": "We welcome volunteer help while developing Brickfolio.", "Uygulamayı dene ve hataları bildir": "Try the app and report bugs", "Eksik ya da hatalı gördüğün yerleri yaz": "Tell us about anything missing or wrong", "Arayüzü kendi dilinde çevirmeye yardım et": "Help translate the interface into your language", "İlgilendiysen aşağıdaki adrese bir not yeterli. İsmin ya da hesabın siteye yazılmaz.": "If you are interested, a short note to the address below is enough. Your name or account is never published on the site.", "Hata ya da öneri mi var?": "Found a bug or have a suggestion?", "Yaz, okuruz. Hatayı daha çabuk bulmamız için sürüm numarasını ve macOS sürümünü belirtmen yeter.": "Write to us, we read everything. To help us find a bug faster, just mention the version number and your macOS version.", "Kopyala": "Copy"}, ATTR={"Nubbin Labs ana sayfa": "Nubbin Labs home", "Bölümler": "Sections", "Brickfolio, koleksiyonun temaya göre gruplandığı görünüm": "Brickfolio showing a collection grouped by theme", "Brickfolio set listesi": "Brickfolio set list", "Brickfolio'da yeni set ekleme formu": "Brickfolio's add-new-set form", "Temaya göre gruplanmış koleksiyon": "Collection grouped by theme", "E-posta adresini kopyala": "Copy email address"}, META_TR="Nubbin Labs: koleksiyoncular için küçük araçlar. Brickfolio, LEGO koleksiyonunu düzenleyen ücretsiz masaüstü uygulaması.", META_EN="Nubbin Labs: small tools for collectors. Brickfolio is a free desktop app for organizing your LEGO collection.", TITLE_TR='Nubbin Labs', TITLE_EN='Nubbin Labs';
+  var kopya={tr:['Kopyala','Kopyalandı'],en:['Copy','Copied']};
+  var dil='tr', hazir=false, ogeler=[], ozellikler=[];
+  function norm(t){return t.replace(/\s+/g,' ').trim()}
+  function topla(){
+    var tum=document.body.querySelectorAll('*');
+    for(var i=0;i<tum.length;i++){var e=tum[i];
+      if(e.children.length===0 && e.tagName!=='SCRIPT' && e.tagName!=='STYLE' && e.id!=='posta'){
+        var t=norm(e.textContent); if(Object.prototype.hasOwnProperty.call(EN,t)) ogeler.push([e,t]);
+      }
+      ['alt','aria-label'].forEach(function(a){var v=e.getAttribute&&e.getAttribute(a);
+        if(v && Object.prototype.hasOwnProperty.call(ATTR,v)) ozellikler.push([e,a,v]);});
+    }
+    hazir=true;
+  }
+  var kb=document.getElementById('kopyala'), tt=document.getElementById('posta');
+  function uygula(d){
+    if(!hazir) topla();
+    dil=d; document.documentElement.lang=d;
+    ogeler.forEach(function(o){ if(o[0]===kb) return; o[0].textContent = d==='en'?EN[o[1]]:o[1]; });
+    ozellikler.forEach(function(o){ o[0].setAttribute(o[1], d==='en'?ATTR[o[2]]:o[2]); });
+    kb.textContent=kopya[d][0];
+    var md=document.querySelector('meta[name="description"]'); if(md) md.setAttribute('content', d==='en'?META_EN:META_TR);
+    document.querySelectorAll('.dil button').forEach(function(b){b.setAttribute('aria-pressed', b.getAttribute('data-dil')===d?'true':'false')});
+    try{localStorage.setItem('nubbin-dil',d)}catch(e){}
+  }
+  document.querySelectorAll('.dil button').forEach(function(b){b.addEventListener('click',function(){uygula(b.getAttribute('data-dil'))})});
+  function sec(){var r=document.createRange();r.selectNodeContents(tt);var s=getSelection();s.removeAllRanges();s.addRange(r)}
+  kb.addEventListener('click',function(){
+    function ok(){kb.textContent=kopya[dil][1];setTimeout(function(){kb.textContent=kopya[dil][0]},1600)}
+    try{navigator.clipboard.writeText(tt.textContent).then(ok,sec)}catch(e){sec()}
   });
+  var ilk=null;
+  try{ilk=localStorage.getItem('nubbin-dil')}catch(e){}
+  if(ilk!=='tr' && ilk!=='en'){ ilk=((navigator.language||'tr').slice(0,2).toLowerCase()==='tr')?'tr':'en'; }
+  if(ilk==='en') uygula('en');
 })();
 </script>
 </body>
