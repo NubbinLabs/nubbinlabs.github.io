@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Citefolio Litlog: ulusal ve uluslararası kaynaklarda akademik makale arayan, açık erişimli makaleleri uygulamada okutan ve kütüphanene kaydeden Mac uygulaması.">
+<title>Citefolio Litlog · Nubbin Labs</title>
+<link rel="canonical" href="https://nubbinlabs.com/citefolio.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#1b1f3b">
+<meta property="og:site_name" content="Nubbin Labs">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nubbinlabs.com/citefolio.html">
+<meta property="og:title" content="Citefolio Litlog · Nubbin Labs">
+<meta property="og:description" content="Citefolio Litlog: akademik makaleleri bulan, okutan ve kütüphanene kaydeden Mac uygulaması.">
+<meta property="og:image" content="https://nubbinlabs.com/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Citefolio Litlog · Nubbin Labs">
+<meta name="twitter:description" content="Citefolio Litlog: akademik makaleleri bulan, okutan ve kütüphanene kaydeden Mac uygulaması.">
+<meta name="twitter:image" content="https://nubbinlabs.com/img/og.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+/* Düzen: tam genişlikte lacivert hero bandı, altında krem zeminde ekran görüntülü bölümler; Fredoka yalnızca marka yazısında, geri kalan Manrope. */
+:root{
+  --bg:#f7f2e4; --surface:#fffdf6; --fg:#171a33; --muted:#555b86; --line:#dfd5b6;
+  --navy:#1b1f3b; --navy2:#262b52; --yellow:#ffc933; --on-navy:#ffffff; --on-navy-muted:#aab0d8;
+  --yellow-ink:#1b1f3b; --shot-line:#cfc49f;
+  --wordmark:'Fredoka',ui-rounded,system-ui,sans-serif; --ui:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111428; --surface:#181c37; --fg:#f1eee2; --muted:#a9afd6; --line:#2b3060;
+  --navy:#0b0e20; --navy2:#171b38; --shot-line:#343a6d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111428; --surface:#181c37; --fg:#f1eee2; --muted:#a9afd6; --line:#2b3060;
+  --navy:#0b0e20; --navy2:#171b38; --shot-line:#343a6d; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--ui);font-size:17px;line-height:1.65}
+a{color:inherit}
+h1,h2,h3{margin:0;line-height:1.12;text-wrap:balance;letter-spacing:-.02em}
+a:focus-visible,button:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:4px}
+.in{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+
+/* üst bant */
+.bant{background:var(--navy);color:var(--on-navy)}
+.ust{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:22px}
+.marka{display:flex;align-items:center;gap:12px;text-decoration:none;font-family:var(--wordmark);font-weight:700;font-size:25px;letter-spacing:-.5px}
+.marka small{font-weight:600;color:var(--yellow);letter-spacing:4px;font-size:13px;margin-left:4px}
+nav{display:flex;gap:28px;font-weight:600;font-size:15px}
+nav a{text-decoration:none;color:var(--on-navy-muted)}
+nav a:hover,nav a:focus-visible{color:#fff}
+.hero{padding-block:48px 0;display:grid;grid-template-columns:minmax(0,1fr);gap:40px}
+.etiket{font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow)}
+.hero h1{font-size:clamp(38px,6.2vw,72px);font-weight:800;max-width:15ch;margin-top:14px}
+.hero p.lead{color:var(--on-navy-muted);font-size:clamp(17px,2vw,20px);max-width:58ch;margin:22px 0 30px}
+.dugmeler{display:flex;gap:14px;flex-wrap:wrap}
+.ucretsiz{margin:18px 0 0;font-weight:700;font-size:14px;letter-spacing:.04em;color:var(--yellow)}
+.hero p.ucretsiz{color:var(--yellow);margin:18px 0 0;font-size:14px}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:16px;padding:14px 24px;border-radius:8px;text-decoration:none;border:2px solid transparent}
+.btn.sari{background:var(--yellow);color:var(--yellow-ink)}
+.btn.cizgi{border-color:#4a5088;color:#fff}
+.btn[aria-disabled="true"]{opacity:.6;cursor:not-allowed}
+.hero-gorsel{margin-top:8px;margin-bottom:-120px;position:relative}
+.cerceve{border-radius:10px;overflow:hidden;border:1px solid var(--shot-line);box-shadow:0 30px 70px -28px rgba(8,10,30,.65);background:var(--surface)}
+.cerceve img{display:block;width:100%;height:auto}
+.cerceve.dikey{max-width:380px;margin-inline:auto}
+.cerceve.kucuk{margin:0 0 16px}
+.cerceve figcaption{padding:8px 12px;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
+.alta-bosluk{height:120px}
+
+/* şerit */
+.serit{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;padding-block:52px 12px;border-bottom:1px solid var(--line)}
+.serit div b{display:block;font-size:15px;margin-bottom:4px}
+.serit div span{color:var(--muted);font-size:15px}
+
+/* bölümler */
+section{padding-block:76px}
+section+section{border-top:1px solid var(--line)}
+.baslik{max-width:60ch;margin-bottom:44px}
+.baslik h2{font-size:clamp(28px,4vw,42px);font-weight:800;margin-top:12px}
+.baslik .etiket{color:var(--muted)}
+.baslik p{color:var(--muted);margin:14px 0 0}
+.ozellik{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:56px;align-items:center;margin-bottom:84px}
+.ozellik:last-child{margin-bottom:0}
+.ozellik.ters{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+.ozellik.ters .metin{order:2}
+.metin h3{font-size:clamp(23px,2.6vw,30px);font-weight:800;margin-bottom:12px}
+.metin p{color:var(--muted);margin:0 0 14px;max-width:46ch}
+.metin ul{margin:0;padding-left:20px;color:var(--muted)}
+.metin li{margin-bottom:6px}
+.cerceve figcaption{font-size:13px;color:var(--muted);padding:10px 14px;border-top:1px solid var(--line)}
+figure{margin:0}
+
+/* platformlar */
+.platform{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.kart{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:26px}
+.kart h3{font-size:22px;font-weight:800;margin-bottom:6px}
+.kart p{margin:0 0 16px;color:var(--muted);font-size:15px}
+.durum{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:4px}
+.durum.var{background:var(--yellow);color:var(--yellow-ink)}
+.durum.yolda{border:1px solid var(--line);color:var(--muted)}
+.indir{margin-top:28px;display:flex;gap:24px;flex-wrap:wrap;align-items:center;justify-content:space-between;background:var(--navy);color:#fff;border-radius:10px;padding:28px 30px}
+.indir h3{font-size:22px;font-weight:800}
+.indir p{margin:6px 0 0;color:var(--on-navy-muted);font-size:15px;max-width:58ch}
+
+.duyuru{display:grid;grid-template-columns:150px minmax(0,1fr);gap:8px 28px;padding-block:22px;border-top:1px solid var(--line)}
+.duyuru:first-of-type{border-top:0;padding-top:0}
+.duyuru time{font-weight:700;font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:4px}
+.duyuru h3{font-size:20px;font-weight:800;margin-bottom:6px}
+.duyuru p{margin:0;color:var(--muted);max-width:62ch}
+.katki ul{margin:0 0 22px;padding-left:20px;color:var(--muted)}
+.katki li{margin-bottom:6px}
+.iki{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:56px}
+.iki h2{font-size:clamp(26px,3.4vw,36px);font-weight:800;margin-bottom:16px}
+.iki p{color:var(--muted);margin:0 0 14px;max-width:52ch}
+.adres{display:inline-flex;gap:12px;align-items:center;flex-wrap:wrap;font-weight:800;font-size:21px;margin-top:6px}
+.adres button{font:inherit;font-size:13px;font-weight:700;background:transparent;color:var(--muted);border:1px solid var(--line);padding:5px 14px;border-radius:6px;cursor:pointer}
+.not{font-size:14px}
+
+footer{background:var(--navy);color:var(--on-navy-muted);font-size:14px}
+footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:30px 40px}
+footer b{color:#fff;font-family:var(--wordmark);font-size:17px}
+footer .yz{color:var(--yellow)}
+footer .yasal{flex-basis:100%;margin:0;font-size:13px;line-height:1.5}
+footer .baglar a{margin-left:16px;text-decoration:none;color:var(--on-navy-muted)}
+footer .baglar a:hover{color:#fff;text-decoration:underline}
+
+
+.dil{display:inline-flex;border:1px solid #4a5088;border-radius:8px;overflow:hidden;margin-left:4px}
+.dil button{font:inherit;font-size:13px;font-weight:800;letter-spacing:.06em;background:transparent;color:var(--on-navy-muted);border:0;padding:6px 12px;cursor:pointer}
+.dil button[aria-pressed="true"]{background:var(--yellow);color:var(--yellow-ink)}
+.ust .sag{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+
+@media (max-width:820px){
+  .ozellik,.ozellik.ters,.iki{grid-template-columns:minmax(0,1fr);gap:28px}
+  .duyuru{grid-template-columns:minmax(0,1fr)}
+  .ozellik.ters .metin{order:0}
+  .ozellik{margin-bottom:60px}
+  section{padding-block:56px}
+  .hero-gorsel{margin-bottom:-60px}.alta-bosluk{height:60px}
+  nav{gap:18px}
+}
+</style><style>
+.yazi{max-width:760px;padding-block:56px 80px}
+.yazi h1{font-size:clamp(30px,4.6vw,46px);font-weight:800;margin:12px 0 8px}
+.yazi h2{font-size:22px;font-weight:800;margin:38px 0 10px}
+.yazi p,.yazi li{color:var(--muted)}
+.yazi ul{padding-left:22px}.yazi li{margin-bottom:6px}
+.yazi .tarih{font-size:14px}
+.yazi .etiket{color:var(--muted)}
+.yazi details{border-top:1px solid var(--line);padding:14px 0}
+.yazi details:last-of-type{border-bottom:1px solid var(--line)}
+.yazi summary{font-weight:700;cursor:pointer;color:var(--fg)}
+.yazi details p{margin:10px 0 0}
+[data-d]{display:none}
+html[lang="tr"] [data-d="tr"],html[lang="en"] [data-d="en"]{display:block}
+html[lang="tr"] li[data-d="tr"],html[lang="en"] li[data-d="en"]{display:list-item}
+html[lang="tr"] span[data-d="tr"],html[lang="en"] span[data-d="en"]{display:inline}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Citefolio Litlog","applicationCategory":"EducationalApplication","operatingSystem":"macOS","description":"Ulusal ve uluslararası kaynaklarda akademik makale arayan; açık erişimli makaleleri uygulamada okutan, kütüphane, atıf zinciri ve kaynakça çıktısı sunan Mac uygulaması.","publisher":{"@type":"Organization","name":"Nubbin Labs","url":"https://nubbinlabs.com/"},"inLanguage":["tr","en"]}</script>
+<style>
+.kartlar{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.kartlar .kart h3{font-size:19px}
+.kartlar .kart p{margin:0;color:var(--muted);font-size:15px}
+.hero.kisa{padding-block:40px 8px}
+.destek-blok{max-width:760px}
+.destek-blok details{border-top:1px solid var(--line);padding:14px 0}
+.destek-blok details:last-of-type{border-bottom:1px solid var(--line)}
+.destek-blok summary{font-weight:700;cursor:pointer;color:var(--fg)}
+.destek-blok details p{margin:10px 0 0;color:var(--muted)}
+.notkutu{font-size:14px;color:var(--muted)}
+span.btn[aria-disabled="true"]{cursor:not-allowed}
+</style>
+</head>
+<body>
+<div class="bant"><div class="in"><header class="ust"><a class="marka" href="index.html" aria-label="Nubbin Labs ana sayfa">
+        <svg width="42" height="42" viewBox="0 0 120 120" aria-hidden="true">
+          <circle cx="60" cy="60" r="56" fill="#ffffff"/>
+          <path d="M38 82 V50 M38 62 C38 44 82 44 82 62 V82" fill="none" stroke="#1b1f3b" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="82" cy="34" r="9" fill="#ffc933"/>
+        </svg>
+        <span>nubbin<small>LABS</small></span>
+      </a>
+<div class="sag"><nav aria-label="Menu"><a href="#ozellikler"><span data-d="tr">Özellikler</span><span data-d="en">Features</span></a><a href="#destek"><span data-d="tr">Destek</span><span data-d="en">Support</span></a><a href="gizlilik.html"><span data-d="tr">Gizlilik</span><span data-d="en">Privacy</span></a><a href="index.html"><span data-d="tr">← Ana sayfa</span><span data-d="en">← Home</span></a></nav>
+<div class="dil" role="group" aria-label="Dil / Language"><button type="button" data-dil="tr" aria-pressed="true">TR</button><button type="button" data-dil="en" aria-pressed="false">EN</button></div></div>
+</header>
+<div class="hero kisa">
+<div>
+<span class="etiket">small tools for researchers</span>
+<h1><span data-d="tr">Makale bul, oku, kütüphanene kaydet.</span><span data-d="en">Find, read and save your sources.</span></h1>
+<p class="lead" data-d="tr">Citefolio Litlog, akademik makaleleri tek yerde arayan ve düzenleyen bir Mac uygulaması. Ulusal ve uluslararası kaynaklarda arar, açık erişimli makaleleri doğrudan uygulamada okutur. Hesap gerekmez; kütüphanen yalnızca senin bilgisayarında kalır.</p>
+<p class="lead" data-d="en">Citefolio Litlog is a Mac app that searches and organizes academic articles in one place. It searches national and international sources and lets you read open-access articles right inside the app. No account needed; your library stays only on your computer.</p>
+<div class="dugmeler"><span class="btn sari" aria-disabled="true"><span data-d="tr">Yakında · macOS için indir</span><span data-d="en">Coming soon · Download for macOS</span></span><a class="btn cizgi" href="#ozellikler"><span data-d="tr">Özelliklere bak</span><span data-d="en">See features</span></a></div>
+<p class="ucretsiz"><span data-d="tr">Beta hazırlığı · Hesap yok · Veriler bilgisayarında</span><span data-d="en">Preparing for beta · No account · Data stays on your computer</span></p>
+</div>
+</div>
+<div class="alta-bosluk" style="height:56px"></div>
+</div></div>
+
+<main><div class="in">
+<section id="ozellikler" style="padding-top:64px">
+<div class="baslik"><span class="etiket"><span data-d="tr">Özellikler</span><span data-d="en">Features</span></span>
+<h2><span data-d="tr">Araştırmacının küçük, düzenli defteri.</span><span data-d="en">A researcher's small, tidy notebook.</span></h2>
+<p data-d="tr">Ekran görüntüleri yakında eklenecek.</p>
+<p data-d="en">Screenshots will be added soon.</p></div>
+<div class="kartlar">
+<div class="kart"><h3><span data-d="tr">Ulusal ve uluslararası kaynaklarda tek arama</span><span data-d="en">One search across national and international sources</span></h3><p data-d="tr">Ulusal ve uluslararası kaynaklarda aynı anda arar. Anahtar kelimeyle ya da başlık, yazar, özet, dergi ve DOI alanlarıyla arayabilir, yıl aralığı seçebilirsin. Aynı makale iki kaynakta çıkarsa tek satırda birleşir.</p>
+<p data-d="en">Searches national and international sources at the same time. Search by keyword or by title, author, abstract, journal and DOI, and pick a year range. If the same article appears in two sources, it is merged into one row.</p></div>
+<div class="kart"><h3><span data-d="tr">Açık erişimli makaleleri bulur</span><span data-d="en">Finds open-access articles</span></h3><p data-d="tr">Arama açık erişimli makalelerle başlar. İstersen erişimi kapalı olanları da ekletirsin; bunlar 🔒 ile işaretlenir. “Tümünü getir” düğmesi sonuçların hepsini sırayla alır.</p>
+<p data-d="en">Search starts with open-access articles. If you want, you can add closed-access ones too; they are marked with 🔒. The “Get all” button fetches every result in turn.</p></div>
+<div class="kart"><h3><span data-d="tr">Makaleyi uygulamada oku</span><span data-d="en">Read the article in the app</span></h3><p data-d="tr">PDF'i bulur, indirir ve uygulamada açar. Türkiye'deki dergilerin makaleleri de dahil. PDF'e vurgu ve not ekleyebilirsin.</p>
+<p data-d="en">It finds the PDF, downloads it and opens it in the app, including articles from Turkish journals. You can add highlights and notes to the PDF.</p></div>
+<div class="kart"><h3><span data-d="tr">Kütüphane</span><span data-d="en">Your library</span></h3><p data-d="tr">Makaleleri koleksiyonlara ayır, etiketle, not yaz. Kendi PDF'lerini sürükleyip ekleyebilirsin; künyeyi uygulama DOI'den ve PDF'ten doldurur.</p>
+<p data-d="en">Sort articles into collections, tag them and write notes. Drag in your own PDFs; the app fills in the details from the DOI and the PDF.</p></div>
+<div class="kart"><h3><span data-d="tr">Atıf zinciri</span><span data-d="en">Citation chain</span></h3><p data-d="tr">Bir makalenin kaynakçasına ve onu anan çalışmalara bak. Veri açık akademik veri tabanlarından gelir.</p>
+<p data-d="en">Look at an article's references and at the works that cite it. The data comes from open academic databases.</p></div>
+<div class="kart"><h3><span data-d="tr">Kayıtlı aramalar</span><span data-d="en">Saved searches</span></h3><p data-d="tr">Bir aramayı kaydet. Uygulamayı açtığında kayıtlı aramalarda kaç yeni makale çıktığını gösterir.</p>
+<p data-d="en">Save a search. When you open the app, it shows how many new articles appeared in your saved searches.</p></div>
+<div class="kart"><h3><span data-d="tr">Kaynakça ve dışa aktarma</span><span data-d="en">Bibliography and export</span></h3><p data-d="tr">Excel, CSV, BibTeX ve RIS çıktısı. Kaynakça stilleri: APA 7 (Türkçe ve İngilizce), ISNAD, Chicago, MLA 9, Harvard. PDF'lerine aldığın notları Word belgesine aktarabilirsin.</p>
+<p data-d="en">Excel, CSV, BibTeX and RIS output. Bibliography styles: APA 7 (Turkish and English), ISNAD, Chicago, MLA 9, Harvard. Notes you take on your PDFs can be exported to a Word document.</p></div>
+</div>
+</section>
+
+<section id="indir">
+<div class="baslik"><span class="etiket"><span data-d="tr">Platform</span><span data-d="en">Platform</span></span>
+<h2><span data-d="tr">Şimdilik Mac için.</span><span data-d="en">For Mac, for now.</span></h2></div>
+<div class="platform">
+<div class="kart"><h3>macOS</h3>
+<p data-d="tr">macOS 14.4 veya üstü gerekir. Kütüphane, notlar ve PDF'ler bilgisayarında durur.</p>
+<p data-d="en">Requires macOS 14.4 or later. Your library, notes and PDFs stay on your computer.</p>
+<span class="durum yolda"><span data-d="tr">Yakında · Beta</span><span data-d="en">Coming soon · Beta</span></span></div>
+</div>
+<p class="notkutu" style="margin-top:20px" data-d="tr">İndirme bağlantısı hazır olduğunda bu sayfada ve ana sayfadaki duyurularda yer alacak.</p>
+<p class="notkutu" style="margin-top:20px" data-d="en">The download link will appear on this page and in the news on the home page when it is ready.</p>
+</section>
+
+<section id="destek">
+<div class="baslik"><span class="etiket"><span data-d="tr">Destek</span><span data-d="en">Support</span></span>
+<h2><span data-d="tr">Destek ve sık sorulanlar</span><span data-d="en">Support and frequently asked questions</span></h2></div>
+<div class="destek-blok">
+<p data-d="tr">Hata, öneri ya da sorun için yaz: <a href="mailto:destek@nubbinlabs.com">destek@nubbinlabs.com</a></p>
+<p data-d="en">For a bug, a suggestion or a problem, write to: <a href="mailto:destek@nubbinlabs.com">destek@nubbinlabs.com</a></p>
+<p data-d="tr">Uygulamada Help > Hata bildir… seçersen e-posta hazır gelir. Hatayı daha çabuk bulmamız için sürüm numarasını (Citefolio > Hakkında), macOS sürümünü ve ne yapmaya çalıştığını yaz.</p>
+<p data-d="en">In the app, choose Help > Hata bildir… and the email comes ready. To help us find the issue faster, include the version number (Citefolio > About), your macOS version and what you were trying to do.</p>
+<details><summary><span data-d="tr">Bazı makalelerde “Makaleyi oku” neden kapalı?</span><span data-d="en">Why is “Read article” disabled for some articles?</span></summary><p data-d="tr">Makalenin açık erişimli PDF'i yoksa (başlığının yanında 🔒 görünür) uygulama içinde okutulamaz. “Makale sayfası” düğmesi yayıncının sayfasını açar; üniversite ağındaysan ya da hesabınla giriş yapabiliyorsan tam metne oradan ulaşabilirsin.</p>
+<p data-d="en">If an article has no open-access PDF (a 🔒 appears next to its title), it cannot be read inside the app. The “Article page” button opens the publisher's page; if you are on a university network or can sign in there, you can reach the full text from it.</p></details>
+<details><summary><span data-d="tr">PDF açılmıyor, yalnızca özet ya da yayın sayfası görünüyor.</span><span data-d="en">The PDF does not open; I only see the abstract or the publisher page.</span></summary><p data-d="tr">Bazı siteler indirmeyi engeller. Uygulama önce PDF'i bir tarayıcı gibi indirmeyi dener; olmazsa makalenin sayfasını uygulamanın içinde açar. Sorun sürerse makalenin adını bize yaz.</p>
+<p data-d="en">Some sites block downloads. The app first tries to download the PDF like a browser would; if that fails, it opens the article's page inside the app. If the problem continues, write to us with the article's title.</p></details>
+<details><summary><span data-d="tr">Bir kaynak “günlük arama kotası doldu” diyor.</span><span data-d="en">A source says “daily search quota reached”.</span></summary><p data-d="tr">Bazı kaynaklar ücretsiz kullanımda arama sayısını sınırlar. Bir süre sonra kendiliğinden düzelir; bu sırada sonuçlar diğer kaynaklardan gelmeye devam eder.</p>
+<p data-d="en">Some sources limit the number of searches on free use. It resolves by itself after a while; meanwhile, results keep coming from the other sources.</p></details>
+<details><summary><span data-d="tr">Arama anahtarı gerekli mi?</span><span data-d="en">Do I need a search key?</span></summary><p data-d="tr">Hayır, isteğe bağlı. Çok sık arama yapıyorsan ücretsiz bir arama anahtarı alıp uygulamanın Ayarlar bölümüne yazabilirsin; nasıl alınacağı Ayarlar'da anlatılıyor.</p>
+<p data-d="en">No, it is optional. If you search very often, you can get a free search key and enter it in the app's Settings; how to get one is explained there.</p></details>
+<details><summary><span data-d="tr">Atıf zinciri neden eksik ya da boş geliyor?</span><span data-d="en">Why is the citation chain incomplete or empty?</span></summary><p data-d="tr">Atıf zinciri açık bir akademik veri tabanıyla çalışır. Özellikle yeni ya da yalnızca ulusal dizinlerde bulunan makalelerin kaynakçası eksik olabilir.</p>
+<p data-d="en">The citation chain works with an open academic database. For new articles, or ones found only in national indexes, the reference list may be missing.</p></details>
+<details><summary><span data-d="tr">Kayıtlı aramalar nasıl çalışır?</span><span data-d="en">How do saved searches work?</span></summary><p data-d="tr">Bir aramadan sonra “Aramayı kaydet”e bas. Uygulama her açıldığında kayıtlı aramaları yeniden çalıştırır ve yeni makale sayısını “Kayıtlı aramalar” menüsünde gösterir. Kontrol her kaynağın ilk 50 sonucuna bakar.</p>
+<p data-d="en">After a search, press “Save search”. Each time the app opens, it re-runs your saved searches and shows the number of new articles in the “Saved searches” menu. The check looks at the first 50 results of each source.</p></details>
+<details><summary><span data-d="tr">Kütüphanem nerede saklanıyor?</span><span data-d="en">Where is my library stored?</span></summary><p data-d="tr">Bilgisayarında, uygulamanın kendi klasöründe. Uygulama her açılışta bir yedek kopya alır. Hiçbir şey bize gönderilmez.</p>
+<p data-d="en">On your computer, in the app's own folder. The app makes a backup copy each time it opens. Nothing is sent to us.</p></details>
+
+<p class="notkutu" style="margin-top:28px"><a href="destek.html"><span data-d="tr">Brickfolio desteği</span><span data-d="en">Brickfolio support</span></a> · <a href="gizlilik.html"><span data-d="tr">Gizlilik politikası</span><span data-d="en">Privacy policy</span></a></p>
+</div>
+</section>
+</div></main>
+<footer><div class="in">
+<span><b>nubbin labs</b> &nbsp;·&nbsp; <span class="yz">small tools for collectors &amp; researchers</span></span>
+<span><a href="index.html">nubbinlabs.com</a> · <a href="gizlilik.html">Gizlilik / Privacy</a> · <a href="destek.html">Destek / Support</a></span>
+</div></footer>
+<script>
+(function(){
+  var d='tr';
+  try{d=localStorage.getItem('nubbin-dil')}catch(e){}
+  if(d!=='tr'&&d!=='en'){d=((navigator.language||'tr').slice(0,2).toLowerCase()==='tr')?'tr':'en'}
+  function u(x){document.documentElement.lang=x;document.title='Citefolio Litlog · Nubbin Labs';
+    document.querySelectorAll('.dil button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-dil')===x?'true':'false')});
+    try{localStorage.setItem('nubbin-dil',x)}catch(e){}}
+  document.querySelectorAll('.dil button').forEach(function(b){b.addEventListener('click',function(){u(b.getAttribute('data-dil'))})});
+  u(d);
+})();
+</script>
+<script data-goatcounter="https://nubbinlabs.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
