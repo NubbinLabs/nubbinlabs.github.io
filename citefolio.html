@@ -73,6 +73,10 @@ nav a:hover,nav a:focus-visible{color:#fff}
 .cerceve.kucuk{margin:0 0 16px}
 .cerceve figcaption{padding:8px 12px;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
 .alta-bosluk{height:120px}
+.galeri{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:0 0 40px}
+.galeri .buyuk{grid-column:1/-1}
+.galeri figure{margin:0}
+@media(max-width:700px){.galeri{grid-template-columns:1fr}}
 
 /* şerit */
 .serit{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;padding-block:52px 12px;border-bottom:1px solid var(--line)}
@@ -197,7 +201,7 @@ span.btn[aria-disabled="true"]{cursor:not-allowed}
 <p class="lead" data-d="tr">Citefolio Litlog, akademik makaleleri tek yerde arayan ve düzenleyen bir Mac uygulaması. Ulusal ve uluslararası kaynaklarda arar, açık erişimli makaleleri doğrudan uygulamada okutur. Hesap gerekmez; kütüphanen yalnızca senin bilgisayarında kalır.</p>
 <p class="lead" data-d="en">Citefolio Litlog is a Mac app that searches and organizes academic articles in one place. It searches national and international sources and lets you read open-access articles right inside the app. No account needed; your library stays only on your computer.</p>
 <div class="dugmeler"><span class="btn sari" aria-disabled="true"><span data-d="tr">Yakında · macOS için indir</span><span data-d="en">Coming soon · Download for macOS</span></span><a class="btn cizgi" href="#ozellikler"><span data-d="tr">Özelliklere bak</span><span data-d="en">See features</span></a></div>
-<p class="ucretsiz"><span data-d="tr">Beta hazırlığı · Hesap yok · Veriler bilgisayarında</span><span data-d="en">Preparing for beta · No account · Data stays on your computer</span></p>
+<p class="ucretsiz"><span data-d="tr">Hesap yok · Veriler bilgisayarında</span><span data-d="en">No account · Data stays on your computer</span></p>
 </div>
 </div>
 <div class="alta-bosluk" style="height:56px"></div>
@@ -207,8 +211,12 @@ span.btn[aria-disabled="true"]{cursor:not-allowed}
 <section id="ozellikler" style="padding-top:64px">
 <div class="baslik"><span class="etiket"><span data-d="tr">Özellikler</span><span data-d="en">Features</span></span>
 <h2><span data-d="tr">Araştırmacının küçük, düzenli defteri.</span><span data-d="en">A researcher's small, tidy notebook.</span></h2>
-<p data-d="tr">Ekran görüntüleri yakında eklenecek.</p>
-<p data-d="en">Screenshots will be added soon.</p></div>
+</div>
+<div class="galeri">
+<figure class="cerceve buyuk"><img src="img/citefolio-arama.jpg" width="1600" height="899" loading="lazy" alt="Citefolio Litlog arama ekranı: sonuç listesi, açık erişim etiketleri ve sağda makale künyesi" data-alt-en="Citefolio Litlog search screen: result list, open-access labels and the article details on the right"><figcaption><span data-d="tr">Arama: sonuçlar, açık erişim işaretleri ve künye</span><span data-d="en">Search: results, open-access labels and details</span></figcaption></figure>
+<figure class="cerceve"><img src="img/citefolio-atif.jpg" width="1600" height="900" loading="lazy" alt="Citefolio Litlog atıf zinciri penceresi: makaleye atıf yapan çalışmaların listesi" data-alt-en="Citefolio Litlog citation chain window: works that cite the article"><figcaption><span data-d="tr">Atıf zinciri: kaynakça ve atıf yapanlar</span><span data-d="en">Citation chain: references and citing works</span></figcaption></figure>
+<figure class="cerceve"><img src="img/citefolio-kutuphane.jpg" width="1600" height="904" loading="lazy" alt="Citefolio Litlog kütüphane ekranı: makale listesi, etiket ve not alanı" data-alt-en="Citefolio Litlog library screen: article list, tag and notes"><figcaption><span data-d="tr">Kütüphane: koleksiyon, etiket ve not</span><span data-d="en">Library: collections, tags and notes</span></figcaption></figure>
+</div>
 <div class="kartlar">
 <div class="kart"><h3><span data-d="tr">Ulusal ve uluslararası kaynaklarda tek arama</span><span data-d="en">One search across national and international sources</span></h3><p data-d="tr">Ulusal ve uluslararası kaynaklarda aynı anda arar. Anahtar kelimeyle ya da başlık, yazar, özet, dergi ve DOI alanlarıyla arayabilir, yıl aralığı seçebilirsin. Aynı makale iki kaynakta çıkarsa tek satırda birleşir.</p>
 <p data-d="en">Searches national and international sources at the same time. Search by keyword or by title, author, abstract, journal and DOI, and pick a year range. If the same article appears in two sources, it is merged into one row.</p></div>
@@ -234,7 +242,7 @@ span.btn[aria-disabled="true"]{cursor:not-allowed}
 <div class="kart"><h3>macOS</h3>
 <p data-d="tr">macOS 14.4 veya üstü gerekir. Kütüphane, notlar ve PDF'ler bilgisayarında durur.</p>
 <p data-d="en">Requires macOS 14.4 or later. Your library, notes and PDFs stay on your computer.</p>
-<span class="durum yolda"><span data-d="tr">Yakında · Beta</span><span data-d="en">Coming soon · Beta</span></span></div>
+<span class="durum yolda"><span data-d="tr">Yakında</span><span data-d="en">Coming soon</span></span></div>
 </div>
 <p class="notkutu" style="margin-top:20px" data-d="tr">İndirme bağlantısı hazır olduğunda bu sayfada ve ana sayfadaki duyurularda yer alacak.</p>
 <p class="notkutu" style="margin-top:20px" data-d="en">The download link will appear on this page and in the news on the home page when it is ready.</p>
@@ -276,7 +284,7 @@ span.btn[aria-disabled="true"]{cursor:not-allowed}
   var d='tr';
   try{d=localStorage.getItem('nubbin-dil')}catch(e){}
   if(d!=='tr'&&d!=='en'){d=((navigator.language||'tr').slice(0,2).toLowerCase()==='tr')?'tr':'en'}
-  function u(x){document.documentElement.lang=x;document.title='Citefolio Litlog · Nubbin Labs';
+  function u(x){document.documentElement.lang=x;document.querySelectorAll('img[data-alt-en]').forEach(function(m){if(!m.dataset.altTr)m.dataset.altTr=m.alt;m.alt=x==='en'?m.dataset.altEn:m.dataset.altTr});document.title='Citefolio Litlog · Nubbin Labs';
     document.querySelectorAll('.dil button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-dil')===x?'true':'false')});
     try{localStorage.setItem('nubbin-dil',x)}catch(e){}}
   document.querySelectorAll('.dil button').forEach(function(b){b.addEventListener('click',function(){u(b.getAttribute('data-dil'))})});
